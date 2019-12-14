@@ -1,0 +1,110 @@
+.sidemenu,
+.right-sidemenu {
+  -ms-flex: 0 0 250px;
+  flex: 0 0 250px;
+  -ms-flex-order: -1;
+  order: -1;
+  height: calc(100vh - 62px);
+  .list-group {
+    width: 250px;
+    position: fixed;
+    height: calc(100vh - 62px);
+    overflow-y: auto;
+  }
+}
+
+.right-sidemenu {
+  -ms-flex: 0 0 250px;
+  -webkit-box-flex: 0;
+  flex: 0 0 250px;
+  -ms-flex-order: -1;
+  -webkit-box-ordinal-group: 0;
+  order: 3;
+  height: calc(100vh - 62px);
+  .list-group {
+    background: $bg-gray;
+    border: 0px;
+  }
+  .list-group-item-dark {
+    margin-bottom: 0px;
+    // border-bottom: 1px solid $gray-400;
+  }
+  .list-group-item {
+    background: $bg-gray;
+    margin-bottom: 0px;
+    border: 0px solid;
+
+    &:hover {
+      text-decoration: none;
+      color: $black;
+      background:#fac52c !important;
+      font-weight: 600;
+    }
+  }
+  .router-link-exact-active {
+    text-decoration: none;
+    background:$bg-text-blue ;
+    color: $white;
+    font-weight: 600;
+  }
+}
+
+.sidemenu {
+  .list-group-item-dark {
+    background-color: $bg-text-blue;
+    border: 0;
+    margin-bottom: 0px;
+    border-bottom: 1px solid $white;
+
+    &:hover,
+    &:focus {
+      color:$black !important;
+      // background-color: #01ddff !important;
+      background: #fac52c!important;
+    }
+  }
+
+  .router-link-exact-active {
+    color:$black !important;
+    // background-color: #01ddff !important;
+    background:#fac52c!important;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(211, 207, 207);
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(177, 177, 177);
+  }
+}
+
+.vue-notification {
+  padding: 10px;
+  margin: 0 5px 5px;
+  color:$white;
+  background: #44a4fc;
+  border-left: 5px solid #187fe7;
+
+  .notification-title {
+    // Style for title line
+    font-size: 15px !important;
+  }
+
+  .notification-content {
+    // Style for content
+    font-size: 14px !important;
+  }
+}

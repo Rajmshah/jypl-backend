@@ -1,0 +1,20 @@
+.btn {
+  letter-spacing: 1px;
+}
+.btn-square {
+  border-radius: 0;
+}
+.btn-pill {
+  border-radius: 50em;
+}
+
+div.file {
+  position: relative;
+  overflow: hidden;
+}
+input.upload-file {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
