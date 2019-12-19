@@ -6,7 +6,7 @@
           <div class="login-box card align-self-center">
             <b-form class="card-body">
               <div class="login-image login-box align-self-center mt-3">
-                <b-img src="@/assets/mtc-logo.png" alt="MTC Marudhar Cup" fluid />
+                <b-img src="@/assets/jypl-logo.png" alt="JYPL" fluid />
               </div>
               <div class="text-center mt-4 mb-3 text-uppercase font-size-lg">Login</div>
               <b-form-group class="form-group floating-label-form-group controls">
@@ -18,10 +18,9 @@
                   required="required"
                   v-model="formData.email"
                 ></b-form-input>
-                <div
-                  class="text-danger small error-txt"
-                  v-if="$v.formData.email.$error"
-                >Email required</div>
+                <div class="text-danger small error-txt" v-if="$v.formData.email.$error">
+                  Email required
+                </div>
               </b-form-group>
               <b-form-group class="form-group floating-label-form-group controls">
                 <b-form-input
@@ -32,17 +31,14 @@
                   required="required"
                   v-model="formData.password"
                 ></b-form-input>
-                <div
-                  class="text-danger small error-txt"
-                  v-if="$v.formData.password.$error"
-                >password required</div>
+                <div class="text-danger small error-txt" v-if="$v.formData.password.$error">
+                  password required
+                </div>
               </b-form-group>
               <div class="login-button my-4 text-center">
-                <b-button
-                  v-on:click="login(formData)"
-                  variant="primary"
-                  class="text-uppercase"
-                >Login</b-button>
+                <b-button v-on:click="login(formData)" variant="primary" class="text-uppercase"
+                  >Login</b-button
+                >
               </div>
             </b-form>
           </div>
@@ -55,7 +51,7 @@
 
 <script>
 // @ is an alias to /src
-import headerLogo from "@/assets/mtc-logo.png";
+import headerLogo from "@/assets/jypl-logo.png";
 // eslint-disable-next-line no-unused-vars
 import service from "@/service/apiService";
 import { required, email } from "vuelidate/lib/validators";
@@ -100,10 +96,7 @@ export default {
       if (this.$v.formData.$error) {
         return;
       } else {
-        if (
-          obj.email == "mtcmarudharcup@gmail.com" &&
-          obj.password == "mtc2019marudharcup"
-        ) {
+        if (obj.email == "jypl@gmail.com" && obj.password == "jypl@2019") {
           global.setUser({
             isLoggedIn: true
           });

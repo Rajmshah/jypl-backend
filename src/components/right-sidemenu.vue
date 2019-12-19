@@ -8,7 +8,9 @@
         v-bind:key="navigation.name"
         @click="showDeleteModal"
         ref="btnShow"
-      >{{ navigation.name }}</button>
+      >
+        {{ navigation.name }}
+      </button>
     </div>
     <b-modal id="deleteModal">
       <div class="d-block">Hello From My Modal!</div>
@@ -18,7 +20,7 @@
 </template>
 
 <script>
-import headerLogo from "@/assets/mtc-logo.png";
+import headerLogo from "@/assets/jypl-logo.png";
 // import button from '@/assets/humburger-button.jpeg';
 
 export default {

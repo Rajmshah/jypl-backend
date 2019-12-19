@@ -23,20 +23,20 @@
                         class="form-control border-0 rounded-0 text-blue"
                         type="text"
                         v-model="searchText"
-                        @input="viewSetting(1)"
+                        @input="viewTeamList(1)"
                         placeholder="Search"
                       />-->
                     </div>
-                    <div class="ml-5" v-if="allSetting.length < 1">
+                    <div class="ml-5">
                       <router-link
                         class="ml-auto text-dark font-weight-bold btn btn-warning"
-                        to="/create-setting"
-                        >Create Setting</router-link
+                        to="/create-team-list"
+                        >Create Team List</router-link
                       >
                     </div>
                   </div>
                 </div>
-                <h5 class="card-title m-0">Setting</h5>
+                <h5 class="card-title m-0">Team List</h5>
               </div>
               <table class="mb-0 table table-hover table-striped">
                 <thead>
@@ -51,7 +51,7 @@
                   </tr>
                 </thead>
                 <tbody class="p-0">
-                  <tr class="table-body-contents" v-if="!allSetting.length">
+                  <tr class="table-body-contents" v-if="!allTeamList.length">
                     <td class="text-center font-size-md font-weight-bold text-muted" colspan="7">
                       <b-spinner
                         class="justify-content-md-center text-blue"
@@ -65,29 +65,29 @@
 
                   <tr
                     class="table-body-contents"
-                    v-for="(Setting, index) in allSetting"
-                    v-bind:key="Setting.key"
-                    :class="Setting.bodyColor"
+                    v-for="(TeamList, index) in allTeamList"
+                    v-bind:key="TeamList.key"
+                    :class="TeamList.bodyColor"
                   >
                     <td>{{ index + 1 + (currentPage - 1) * 10 }}</td>
-                    <td>{{ Setting.message || "-" }}</td>
+                    <td>{{ TeamList.name || "-" }}</td>
                     <td class="pl-4">
                       <router-link
                         class="text-warning btn px-1 py-0"
                         v-b-tooltip.hover
                         title="Edit"
-                        :to="{ name: 'EditSetting', params: { id: Setting._id } }"
+                        :to="{ name: 'EditTeamList', params: { id: TeamList._id } }"
                         append
                       >
                         <font-awesome-icon :icon="['fas', 'edit']" />
                       </router-link>
 
-                      <button class="text-danger btn px-1 py-0" v-b-modal="'delete' + Setting._id">
+                      <button class="text-danger btn px-1 py-0" v-b-modal="'delete' + TeamList._id">
                         <font-awesome-icon :icon="['far', 'trash-alt']" />
                       </button>
                       <Delete
                         class="text-center"
-                        :data="{ id: Setting._id }"
+                        :data="{ id: TeamList._id }"
                         v-on:event_child="deleteAndRefresh"
                       ></Delete>
                     </td>
@@ -116,7 +116,7 @@ export default {
   },
   data() {
     return {
-      type: "Setting",
+      type: "TeamList",
       id: "",
       page: "",
       searchText: "",
@@ -124,11 +124,11 @@ export default {
       totalCount: 0,
       perPage: 0,
       dataFound: false,
-      allSetting: [],
-      SettingArray: [],
+      allTeamList: [],
+      TeamListArray: [],
       breadCrum: [
         {
-          text: "Setting"
+          text: "Team List"
         }
       ],
       tableHeaders: [
@@ -137,7 +137,7 @@ export default {
           key: "key1"
         },
         {
-          tableHeaderName: "Message",
+          tableHeaderName: "Team Name",
           key: "key1"
         },
         {
@@ -151,24 +151,27 @@ export default {
     };
   },
   created() {
-    this.viewSetting(this.currentPage);
+    this.viewTeamList(this.currentPage);
   },
 
   methods: {
     deleteAndRefresh(obj) {
-      service.deleteSetting(obj._id, data => {
-        // this.allSetting = [];
-        this.$router.go(0);
-        // this.viewSetting(this.currentPage);
+      service.deleteTeamList(obj._id, data => {
+        if (this.allTeamList.length == 1) {
+          this.allTeamList = [];
+          this.$router.go(0);
+        } else {
+          this.viewTeamList(this.currentPage);
+        }
       });
     },
-    viewSetting(page) {
+    viewTeamList(page) {
       this.currentPage = page;
       const formData = {};
       formData.page = page;
-      service.searchSetting(formData, data => {
+      service.searchTeamList(formData, data => {
         if (data.status === 200) {
-          this.allSetting = data.data;
+          this.allTeamList = data.data;
           this.totalCount = data.data.count;
           this.perPage = 10;
         } else if (page > 1) {
@@ -189,9 +192,9 @@ export default {
     },
     goToPage(page) {
       this.$router.push({
-        name: "ViewSetting"
+        name: "ViewTeamList"
       });
-      this.viewSetting(page);
+      this.viewTeamList(page);
     }
   }
 };

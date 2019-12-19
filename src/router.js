@@ -1,208 +1,231 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from "vue";
+import Router from "vue-router";
 // import Home from './views/Home.vue';
 
 // import Dashboard from './views/dashboard/Dashboard.vue';
 
-import Login from './views/Login.vue';
+import Login from "./views/Login.vue";
 
 // User Service
-import ViewTeam from './views/Team/ViewTeam.vue';
-import ViewTeamDetail from './views/Team/ViewTeamDetail.vue';
+import ViewTeam from "./views/Team/ViewTeam.vue";
+import ViewTeamDetail from "./views/Team/ViewTeamDetail.vue";
 
 // user
-import ViewUser from './views/User/ViewUser.vue';
-import CreateUser from './views/User/CreateUser.vue';
-import EditUser from './views/User/EditUser.vue';
+import ViewUser from "./views/User/ViewUser.vue";
+import CreateUser from "./views/User/CreateUser.vue";
+import EditUser from "./views/User/EditUser.vue";
 
 // Setting
-import ViewSetting from './views/Setting/ViewSetting.vue';
-import CreateSetting from './views/Setting/CreateSetting.vue';
-import EditSetting from './views/Setting/EditSetting.vue';
+import ViewSetting from "./views/Setting/ViewSetting.vue";
+import CreateSetting from "./views/Setting/CreateSetting.vue";
+import EditSetting from "./views/Setting/EditSetting.vue";
+
+// TeamList
+import ViewTeamList from "./views/TeamList/ViewTeamList.vue";
+import CreateTeamList from "./views/TeamList/CreateTeamList.vue";
+import EditTeamList from "./views/TeamList/EditTeamList.vue";
 
 // Home
-import ViewHome from './views/Home/ViewHome.vue';
-import CreateHome from './views/Home/CreateHome.vue';
-import EditHome from './views/Home/EditHome.vue';
+import ViewHome from "./views/Home/ViewHome.vue";
+import CreateHome from "./views/Home/CreateHome.vue";
+import EditHome from "./views/Home/EditHome.vue";
 
 // About
-import ViewAbout from './views/About/ViewAbout.vue';
-import CreateAbout from './views/About/CreateAbout.vue';
-import EditAbout from './views/About/EditAbout.vue';
+import ViewAbout from "./views/About/ViewAbout.vue";
+import CreateAbout from "./views/About/CreateAbout.vue";
+import EditAbout from "./views/About/EditAbout.vue";
 
 // Contact
-import ViewContact from './views/Contact/ViewContact.vue';
-import CreateContact from './views/Contact/CreateContact.vue';
-import EditContact from './views/Contact/EditContact.vue';
+import ViewContact from "./views/Contact/ViewContact.vue";
+import CreateContact from "./views/Contact/CreateContact.vue";
+import EditContact from "./views/Contact/EditContact.vue";
 
 // Sponsor
-import ViewSponsor from './views/Sponsor/ViewSponsor.vue';
-import CreateSponsor from './views/Sponsor/CreateSponsor.vue';
-import EditSponsor from './views/Sponsor/EditSponsor.vue';
+import ViewSponsor from "./views/Sponsor/ViewSponsor.vue";
+import CreateSponsor from "./views/Sponsor/CreateSponsor.vue";
+import EditSponsor from "./views/Sponsor/EditSponsor.vue";
 
 // Subscription
-import ViewSubscription from './views/Subscription/ViewSubscription.vue';
+import ViewSubscription from "./views/Subscription/ViewSubscription.vue";
 
 // Enquiry
-import ViewEnquiry from './views/Enquiry/ViewEnquiry.vue';
+import ViewEnquiry from "./views/Enquiry/ViewEnquiry.vue";
 
-import global from '@/service/global.js';
+import global from "@/service/global.js";
 
 Vue.use(Router);
 
 function guard(to, from, next) {
   const userConfig = global.getUser();
-  if (Vue._.isNull(userConfig) && Vue._.isEqual(to.name, 'Login')) {
+  if (Vue._.isNull(userConfig) && Vue._.isEqual(to.name, "Login")) {
     next();
-  } else if (!Vue._.isNull(userConfig) && Vue._.isEqual(to.name, 'Login')) {
-    next('/view-user');
-  } else if (Vue._.isNull(userConfig) && !Vue._.isEqual(to.name, 'Login')) {
-    next('/');
+  } else if (!Vue._.isNull(userConfig) && Vue._.isEqual(to.name, "Login")) {
+    next("/view-user");
+  } else if (Vue._.isNull(userConfig) && !Vue._.isEqual(to.name, "Login")) {
+    next("/");
   } else {
     next();
   }
 }
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'Login',
-      component: Login,
+      path: "/",
+      name: "Login",
+      component: Login
     },
     {
-      path: '/view-team',
-      name: 'View Team',
+      path: "/view-team",
+      name: "View Team",
       beforeEnter: guard,
-      component: ViewTeam,
+      component: ViewTeam
     },
     {
-      path: '/view-team-detail/:id',
-      name: 'View TeamDetail',
+      path: "/view-team-detail/:id",
+      name: "View TeamDetail",
       beforeEnter: guard,
-      component: ViewTeamDetail,
+      component: ViewTeamDetail
     },
     {
-      path: '/create-user',
-      name: 'CreateUser',
+      path: "/create-user",
+      name: "CreateUser",
       beforeEnter: guard,
-      component: CreateUser,
+      component: CreateUser
     },
     {
-      path: '/view-user',
-      name: 'ViewUser',
+      path: "/view-user",
+      name: "ViewUser",
       beforeEnter: guard,
-      component: ViewUser,
+      component: ViewUser
     },
     {
-      path: '/edit-user/:id',
-      name: 'EditUser',
+      path: "/edit-user/:id",
+      name: "EditUser",
       beforeEnter: guard,
-      component: EditUser,
+      component: EditUser
     },
     {
-      path: '/create-setting',
-      name: 'CreateSetting',
+      path: "/create-setting",
+      name: "CreateSetting",
       beforeEnter: guard,
-      component: CreateSetting,
+      component: CreateSetting
     },
     {
-      path: '/view-setting',
-      name: 'ViewSetting',
+      path: "/view-setting",
+      name: "ViewSetting",
       beforeEnter: guard,
-      component: ViewSetting,
+      component: ViewSetting
     },
     {
-      path: '/edit-setting/:id',
-      name: 'EditSetting',
+      path: "/edit-setting/:id",
+      name: "EditSetting",
       beforeEnter: guard,
-      component: EditSetting,
+      component: EditSetting
     },
     {
-      path: '/create-home',
-      name: 'CreateHome',
+      path: "/create-team-list",
+      name: "CreateTeamList",
       beforeEnter: guard,
-      component: CreateHome,
+      component: CreateTeamList
     },
     {
-      path: '/view-home',
-      name: 'ViewHome',
+      path: "/view-team-list",
+      name: "ViewTeamList",
       beforeEnter: guard,
-      component: ViewHome,
+      component: ViewTeamList
     },
     {
-      path: '/edit-home/:id',
-      name: 'EditHome',
+      path: "/edit-team-list/:id",
+      name: "EditTeamList",
       beforeEnter: guard,
-      component: EditHome,
+      component: EditTeamList
     },
     {
-      path: '/create-about',
-      name: 'CreateAbout',
+      path: "/create-home",
+      name: "CreateHome",
       beforeEnter: guard,
-      component: CreateAbout,
+      component: CreateHome
     },
     {
-      path: '/view-about',
-      name: 'ViewAbout',
+      path: "/view-home",
+      name: "ViewHome",
       beforeEnter: guard,
-      component: ViewAbout,
+      component: ViewHome
     },
     {
-      path: '/edit-about/:id',
-      name: 'EditAbout',
+      path: "/edit-home/:id",
+      name: "EditHome",
       beforeEnter: guard,
-      component: EditAbout,
+      component: EditHome
     },
     {
-      path: '/create-contact',
-      name: 'CreateContact',
+      path: "/create-about",
+      name: "CreateAbout",
       beforeEnter: guard,
-      component: CreateContact,
+      component: CreateAbout
     },
     {
-      path: '/view-contact',
-      name: 'ViewContact',
+      path: "/view-about",
+      name: "ViewAbout",
       beforeEnter: guard,
-      component: ViewContact,
+      component: ViewAbout
     },
     {
-      path: '/edit-contact/:id',
-      name: 'EditContact',
+      path: "/edit-about/:id",
+      name: "EditAbout",
       beforeEnter: guard,
-      component: EditContact,
+      component: EditAbout
     },
     {
-      path: '/create-sponsor',
-      name: 'CreateSponsor',
+      path: "/create-contact",
+      name: "CreateContact",
       beforeEnter: guard,
-      component: CreateSponsor,
+      component: CreateContact
     },
     {
-      path: '/view-sponsor',
-      name: 'ViewSponsor',
+      path: "/view-contact",
+      name: "ViewContact",
       beforeEnter: guard,
-      component: ViewSponsor,
+      component: ViewContact
     },
     {
-      path: '/edit-sponsor/:id',
-      name: 'EditSponsor',
+      path: "/edit-contact/:id",
+      name: "EditContact",
       beforeEnter: guard,
-      component: EditSponsor,
+      component: EditContact
     },
     {
-      path: '/view-subscription',
-      name: 'ViewSubscription',
+      path: "/create-sponsor",
+      name: "CreateSponsor",
       beforeEnter: guard,
-      component: ViewSubscription,
+      component: CreateSponsor
     },
     {
-      path: '/view-enquiry',
-      name: 'ViewEnquiry',
+      path: "/view-sponsor",
+      name: "ViewSponsor",
       beforeEnter: guard,
-      component: ViewEnquiry,
+      component: ViewSponsor
     },
-  ],
+    {
+      path: "/edit-sponsor/:id",
+      name: "EditSponsor",
+      beforeEnter: guard,
+      component: EditSponsor
+    },
+    {
+      path: "/view-subscription",
+      name: "ViewSubscription",
+      beforeEnter: guard,
+      component: ViewSubscription
+    },
+    {
+      path: "/view-enquiry",
+      name: "ViewEnquiry",
+      beforeEnter: guard,
+      component: ViewEnquiry
+    }
+  ]
 });

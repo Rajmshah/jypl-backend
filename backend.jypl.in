@@ -1,8 +1,8 @@
 server {
        listen 80;
-       server_name backend.mtcmarudharcup.com;
+       server_name backend.jypl.in;
        location / {
-               root /home/projects/mtc-backend/dist;
+               root /home/projects/jypl-backend/dist;
                index index.html index.htm;
                try_files $uri $uri/ /index.html =404;
        }

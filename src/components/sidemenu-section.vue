@@ -7,13 +7,14 @@
         v-for="navigation in navigations"
         v-bind:key="navigation.name"
         v-bind:to="navigation.link"
-      >{{ navigation.name }}</router-link>
+        >{{ navigation.name }}</router-link
+      >
     </div>
   </div>
 </template>
 
 <script>
-import headerLogo from "@/assets/mtc-logo.png";
+import headerLogo from "@/assets/jypl-logo.png";
 
 export default {
   Logo: headerLogo,
@@ -22,37 +23,41 @@ export default {
     return {
       Logo: headerLogo,
       navigations: [
+        // {
+        //   name: "User",
+        //   link: "/view-user"
+        // },
+        // {
+        //   name: "Team",
+        //   link: "/view-team"
+        // },
+        // {
+        //   name: "Home",
+        //   link: "/view-home"
+        // },
+        // {
+        //   name: "About",
+        //   link: "/view-about"
+        // },
+        // {
+        //   name: "Contact",
+        //   link: "/view-contact"
+        // },
+        // {
+        //   name: "Enquiry",
+        //   link: "/view-enquiry"
+        // },
+        // {
+        //   name: "Subscription",
+        //   link: "/view-subscription"
+        // },
+        // {
+        //   name: "Sponsors",
+        //   link: "/view-sponsor"
+        // },
         {
-          name: "User",
-          link: "/view-user"
-        },
-        {
-          name: "Team",
-          link: "/view-team"
-        },
-        {
-          name: "Home",
-          link: "/view-home"
-        },
-        {
-          name: "About",
-          link: "/view-about"
-        },
-        {
-          name: "Contact",
-          link: "/view-contact"
-        },
-        {
-          name: "Enquiry",
-          link: "/view-enquiry"
-        },
-        {
-          name: "Subscription",
-          link: "/view-subscription"
-        },
-        {
-          name: "Sponsors",
-          link: "/view-sponsor"
+          name: "Team List",
+          link: "/view-team-list"
         },
         {
           name: "Setting",

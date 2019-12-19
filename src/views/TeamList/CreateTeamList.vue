@@ -11,36 +11,33 @@
       <!-- header end -->
       <div class="main-content">
         <!-- breadcrum -->
-        <b-breadcrumb :items="breadCrum" append class="bg-light border rounded-0" />
+        <b-breadcrumb :items="breadCrum" class="bg-light border rounded-0" />
         <div class="container-fluid basic-table my-3">
           <div class="card rounded-0">
             <div class="card-body p-0 rounded-0">
               <div class="card-header">
-                <h5 class="card-title m-0">Edit Setting</h5>
-                <!-- <h4>Edit Setting</h4> -->
+                <h5 class="card-title m-0">Create Team List</h5>
               </div>
               <div class="p-3">
-                <b-form @submit="onSubmit" v-if="show">
-                  <b-form-group
-                    id="exampleInputGroup1"
-                    :class="{ hasError: $v.form.message.$error }"
-                  >
-                    <label for="message">
-                      Message:
+                <b-form @reset="onReset" v-if="show">
+                  <b-form-group id="exampleInputGroup1" :class="{ hasError: $v.form.name.$error }">
+                    <label for="name">
+                      Team Name:
                       <span class="text-danger">*</span>
                     </label>
                     <b-form-input
                       class="rounded-0"
-                      id="message"
+                      id="name"
                       type="text"
-                      v-model="form.message"
+                      v-model="form.name"
                       required
-                      placeholder="Enter Message"
+                      placeholder="Enter Team Name"
                     />
-                    <div class="text-danger small error-txt" v-if="$v.form.message.$error">
-                      Message required
+                    <div class="text-danger small error-txt" v-if="$v.form.name.$error">
+                      Team Name required
                     </div>
                   </b-form-group>
+
                   <!--End -->
 
                   <b-form-group class="text-center">
@@ -50,11 +47,10 @@
                       class="mr-2 px-3 rounded-0"
                       >Submit</b-button
                     >
-                    <b-button
-                      class="rounded-0 px-3"
-                      type="cancel"
-                      v-on:click="onCancel()"
-                      variant="danger"
+                    <b-button class="rounded-0 mr-2 px-3" type="reset" variant="danger"
+                      >Reset</b-button
+                    >
+                    <b-button class="rounded-0 px-3" @click="goToPage()" variant="warning"
                       >Cancel</b-button
                     >
                   </b-form-group>
@@ -69,12 +65,11 @@
 </template>
 
 <script>
-import HeaderSection from "@/components/header-section.vue";
 import { required, email } from "vuelidate/lib/validators";
+import HeaderSection from "@/components/header-section.vue";
 import Sidemenu from "@/components/sidemenu-section.vue";
 import service from "@/service/apiService";
-import router from "@/router.js";
-import { constants } from "crypto";
+
 export default {
   name: "Form",
   components: {
@@ -83,14 +78,14 @@ export default {
   },
   data() {
     return {
-      error: [],
+      errors: [],
       breadCrum: [
         {
-          text: "Setting",
-          href: "/view-setting"
+          text: "Team List",
+          href: "/view-team-list"
         },
         {
-          text: "Edit Setting"
+          text: "Create Team List"
         }
       ],
       form: {},
@@ -100,41 +95,40 @@ export default {
   },
   validations: {
     form: {
-      message: {
+      name: {
         required
       }
     }
   },
-  created() {
-    this.getOne();
-  },
   methods: {
-    getOne() {
-      if (this.$route.params.id) {
-        service.getOneSetting(this.$route.params.id, data => {
-          this.form = data.data;
-        });
-      }
-    },
     onSubmit(form) {
       this.$v.form.$touch();
       if (this.$v.form.$error) {
         return;
       } else {
-        service.updateSetting(this.$route.params.id, form, data => {
+        service.saveTeamList(form, data => {
           if (data.data) {
-            this.$router.push("/view-setting");
+            this.$router.push("/view-team-list");
           }
         });
       }
     },
-    onCancel() {
-      this.$router.push("/view-setting");
+    onReset(evt) {
+      evt.preventDefault();
+      /* Reset our form values */
+      delete this.form.name;
+      /* Trick to reset/clear native browser form validation state */
+      this.show = false;
+      this.$nextTick(() => {
+        this.show = true;
+      });
+    },
+    goToPage() {
+      this.$router.push("/view-team-list");
     }
   }
 };
 </script>
-
 <style lang="scss" scoped>
 @import "~@/scss/import";
 .error-txt {

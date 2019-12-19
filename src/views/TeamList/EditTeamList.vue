@@ -16,29 +16,26 @@
           <div class="card rounded-0">
             <div class="card-body p-0 rounded-0">
               <div class="card-header">
-                <h5 class="card-title m-0">Edit Setting</h5>
-                <!-- <h4>Edit Setting</h4> -->
+                <h5 class="card-title m-0">Edit Team List</h5>
+                <!-- <h4>Edit Team List</h4> -->
               </div>
               <div class="p-3">
                 <b-form @submit="onSubmit" v-if="show">
-                  <b-form-group
-                    id="exampleInputGroup1"
-                    :class="{ hasError: $v.form.message.$error }"
-                  >
-                    <label for="message">
-                      Message:
+                  <b-form-group id="exampleInputGroup1" :class="{ hasError: $v.form.name.$error }">
+                    <label for="name">
+                      Team Name:
                       <span class="text-danger">*</span>
                     </label>
                     <b-form-input
                       class="rounded-0"
-                      id="message"
+                      id="name"
                       type="text"
-                      v-model="form.message"
+                      v-model="form.name"
                       required
-                      placeholder="Enter Message"
+                      placeholder="Enter Team Name"
                     />
-                    <div class="text-danger small error-txt" v-if="$v.form.message.$error">
-                      Message required
+                    <div class="text-danger small error-txt" v-if="$v.form.name.$error">
+                      Team Name required
                     </div>
                   </b-form-group>
                   <!--End -->
@@ -86,11 +83,11 @@ export default {
       error: [],
       breadCrum: [
         {
-          text: "Setting",
-          href: "/view-setting"
+          text: "Team List",
+          href: "/view-team-list"
         },
         {
-          text: "Edit Setting"
+          text: "Edit Team List"
         }
       ],
       form: {},
@@ -100,7 +97,7 @@ export default {
   },
   validations: {
     form: {
-      message: {
+      name: {
         required
       }
     }
@@ -111,7 +108,7 @@ export default {
   methods: {
     getOne() {
       if (this.$route.params.id) {
-        service.getOneSetting(this.$route.params.id, data => {
+        service.getOneTeamList(this.$route.params.id, data => {
           this.form = data.data;
         });
       }
@@ -121,15 +118,15 @@ export default {
       if (this.$v.form.$error) {
         return;
       } else {
-        service.updateSetting(this.$route.params.id, form, data => {
+        service.updateTeamList(this.$route.params.id, form, data => {
           if (data.data) {
-            this.$router.push("/view-setting");
+            this.$router.push("/view-team-list");
           }
         });
       }
     },
     onCancel() {
-      this.$router.push("/view-setting");
+      this.$router.push("/view-team-list");
     }
   }
 };

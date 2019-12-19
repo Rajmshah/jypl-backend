@@ -22,25 +22,23 @@
                 <b-form @reset="onReset" v-if="show">
                   <b-form-group
                     id="exampleInputGroup1"
-                    :class="{ hasError: $v.form.playerCount.$error }"
+                    :class="{ hasError: $v.form.message.$error }"
                   >
-                    <label for="playerCount">
-                      Player Count
-                      <small>(Per Team)</small>:
+                    <label for="message">
+                      Message:
                       <span class="text-danger">*</span>
                     </label>
                     <b-form-input
                       class="rounded-0"
-                      id="playerCount"
-                      type="number"
-                      v-model="form.playerCount"
+                      id="message"
+                      type="text"
+                      v-model="form.message"
                       required
-                      placeholder="Enter Player Count"
+                      placeholder="Enter Message"
                     />
-                    <div
-                      class="text-danger small error-txt"
-                      v-if="$v.form.playerCount.$error"
-                    >Player Count required</div>
+                    <div class="text-danger small error-txt" v-if="$v.form.message.$error">
+                      Message required
+                    </div>
                   </b-form-group>
 
                   <!--End -->
@@ -50,9 +48,14 @@
                       v-on:click="onSubmit(form)"
                       variant="primary"
                       class="mr-2 px-3 rounded-0"
-                    >Submit</b-button>
-                    <b-button class="rounded-0 mr-2 px-3" type="reset" variant="danger">Reset</b-button>
-                    <b-button class="rounded-0 px-3" @click="goToPage()" variant="warning">Cancel</b-button>
+                      >Submit</b-button
+                    >
+                    <b-button class="rounded-0 mr-2 px-3" type="reset" variant="danger"
+                      >Reset</b-button
+                    >
+                    <b-button class="rounded-0 px-3" @click="goToPage()" variant="warning"
+                      >Cancel</b-button
+                    >
                   </b-form-group>
                 </b-form>
               </div>
@@ -95,7 +98,7 @@ export default {
   },
   validations: {
     form: {
-      playerCount: {
+      message: {
         required
       }
     }
@@ -116,7 +119,7 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       /* Reset our form values */
-      delete this.form.playerCount;
+      delete this.form.message;
       /* Trick to reset/clear native browser form validation state */
       this.show = false;
       this.$nextTick(() => {
