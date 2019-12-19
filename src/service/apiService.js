@@ -606,7 +606,7 @@ export default {
       .catch(err => {
         callback(err);
       }),
-  generateTeamExcel: (reportData, filename, callback) =>
+  generatePlayerExcel: (reportData, filename, callback) =>
     axios({
       url: `${adminUrl}Player/generateExcel`,
       reportData,

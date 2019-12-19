@@ -51,11 +51,11 @@
 
 <script>
 // @ is an alias to /src
+import { required, email } from "vuelidate/lib/validators";
+import { constants } from "crypto";
 import headerLogo from "@/assets/jypl-logo.png";
 // eslint-disable-next-line no-unused-vars
 import service from "@/service/apiService";
-import { required, email } from "vuelidate/lib/validators";
-import { constants } from "crypto";
 import global from "@/service/global.js";
 
 export default {
@@ -88,27 +88,24 @@ export default {
   created() {},
   methods: {
     login(formData) {
-      var obj = {
+      const obj = {
         email: formData.email,
         password: formData.password
       };
       this.$v.formData.$touch();
       if (this.$v.formData.$error) {
-        return;
+      } else if (obj.email === "jypl@gmail.com" && obj.password === "jypl@2019") {
+        global.setUser({
+          isLoggedIn: true
+        });
+        this.$toaster.success("Login Successfully.", {
+          timeout: 2000
+        });
+        this.$router.push("/view-user");
       } else {
-        if (obj.email == "jypl@gmail.com" && obj.password == "jypl@2019") {
-          global.setUser({
-            isLoggedIn: true
-          });
-          this.$toaster.success("Login Successfully.", {
-            timeout: 2000
-          });
-          this.$router.push("/view-user");
-        } else {
-          this.$toaster.error("Please Enter Valid Data.", {
-            timeout: 2000
-          });
-        }
+        this.$toaster.error("Please Enter Valid Data.", {
+          timeout: 2000
+        });
       }
     }
   }

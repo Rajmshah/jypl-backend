@@ -15,6 +15,11 @@ import ViewUser from "./views/User/ViewUser.vue";
 import CreateUser from "./views/User/CreateUser.vue";
 import EditUser from "./views/User/EditUser.vue";
 
+// Player
+import ViewPlayer from "./views/Player/ViewPlayer.vue";
+import CreatePlayer from "./views/Player/CreatePlayer.vue";
+import EditPlayer from "./views/Player/EditPlayer.vue";
+
 // Setting
 import ViewSetting from "./views/Setting/ViewSetting.vue";
 import CreateSetting from "./views/Setting/CreateSetting.vue";
@@ -106,6 +111,24 @@ export default new Router({
       name: "EditUser",
       beforeEnter: guard,
       component: EditUser
+    },
+    {
+      path: "/create-player",
+      name: "CreatePlayer",
+      beforeEnter: guard,
+      component: CreatePlayer
+    },
+    {
+      path: "/view-player",
+      name: "ViewPlayer",
+      beforeEnter: guard,
+      component: ViewPlayer
+    },
+    {
+      path: "/edit-player/:id",
+      name: "EditPlayer",
+      beforeEnter: guard,
+      component: EditPlayer
     },
     {
       path: "/create-setting",

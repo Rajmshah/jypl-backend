@@ -60,6 +60,10 @@ export default {
           link: "/view-team-list"
         },
         {
+          name: "Player",
+          link: "/view-player"
+        },
+        {
           name: "Setting",
           link: "/view-setting"
         }
