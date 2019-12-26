@@ -7,6 +7,16 @@ import Toaster from "v-toaster";
 // You need a specific loader for CSS files like https://github.com/webpack/css-loader
 import "v-toaster/dist/v-toaster.css";
 
+// TOASTED
+import Toasted from "vue-toasted";
+
+// vue select
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
+
+// vue-tel-input
+import VueTelInput from "vue-tel-input";
+
 // Font awesome
 import "vue-awesome/icons";
 import Icon from "vue-awesome/components/Icon.vue";
@@ -19,12 +29,11 @@ import Vuelidate from "vuelidate";
 
 // vue multiSelect
 import Multiselect from "vue-multiselect";
-Vue.component("vue-multiselect", Multiselect);
 import "vue-multiselect/dist/vue-multiselect.min.css";
 
 // FontAwesomeIcon
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEye, faTrashAlt } from "@fortawesome/free-regular-svg-icons"; // far
+import { faEye, faTrashAlt, faCalendar } from "@fortawesome/free-regular-svg-icons"; // far
 import {
   faAlignRight,
   faHeart,
@@ -36,7 +45,9 @@ import {
   faGift,
   faUsers,
   faEdit,
-  faPencilAlt
+  faPencilAlt,
+  faEnvelope,
+  faDownload
 } from "@fortawesome/free-solid-svg-icons"; // fas and fa
 import { faTwitter, faFacebookSquare } from "@fortawesome/free-brands-svg-icons"; // fab
 
@@ -49,6 +60,20 @@ import tinymce from "vue-tinymce-editor";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+
+Vue.use(Toasted, {
+  position: "top-right",
+  duration: 5000,
+  keepOnHover: true,
+  theme: "bubble"
+});
+Vue.component("v-select", vSelect);
+Vue.use(VueTelInput);
+
+// vue momemt
+Vue.use(require("vue-moment"));
+
+Vue.component("vue-multiselect", Multiselect);
 // vue-tinymce-editor
 
 Vue.component("tinymce", tinymce);
@@ -67,6 +92,8 @@ Vue.config.productionTip = false;
 library.add(
   faAlignRight,
   faEye,
+  faEnvelope,
+  faDownload,
   faEdit,
   faTrashAlt,
   faTwitter,
@@ -79,7 +106,8 @@ library.add(
   faUsers,
   faSignOutAlt,
   faPencilAlt,
-  faTrash
+  faTrash,
+  faCalendar
 );
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);

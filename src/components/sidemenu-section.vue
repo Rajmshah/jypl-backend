@@ -56,12 +56,12 @@ export default {
         //   link: "/view-sponsor"
         // },
         {
-          name: "Team List",
-          link: "/view-team-list"
-        },
-        {
           name: "Player",
           link: "/view-player"
+        },
+        {
+          name: "Team List",
+          link: "/view-team-list"
         },
         {
           name: "Setting",

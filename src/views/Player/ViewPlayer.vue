@@ -82,9 +82,22 @@
                     <td>{{ Player.fullName || "-" }}</td>
                     <td>{{ Player.team || "-" }}</td>
                     <td>{{ Player.paymentStatus || "-" }}</td>
-                    <td class="pl-4">
+                    <td class="">
+                      <!-- <button
+                        class="text-dark btn pr-1 pl-0 py-0"
+                        v-if="Player.paymentStatus === 'Paid'"
+                        @click="generateWelcomeMail(Player)"
+                      >
+                        <font-awesome-icon :icon="['fas', 'envelope']" />
+                      </button>
+                      <button
+                        class="text-dark btn pr-1 pl-1 py-0"
+                        v-if="Player.paymentStatus === 'Paid'"
+                      >
+                        <font-awesome-icon :icon="['fas', 'download']" />
+                      </button> -->
                       <router-link
-                        class="text-warning btn px-1 py-0"
+                        class="text-warning btn pr-1 pl-1 py-0"
                         v-b-tooltip.hover
                         title="Edit"
                         :to="{ name: 'EditPlayer', params: { id: Player._id } }"
@@ -93,7 +106,7 @@
                         <font-awesome-icon :icon="['fas', 'edit']" />
                       </router-link>
 
-                      <button class="text-danger btn px-1 py-0" v-b-modal="'delete' + Player._id">
+                      <button class="text-danger btn  pl-1 py-0" v-b-modal="'delete' + Player._id">
                         <font-awesome-icon :icon="['far', 'trash-alt']" />
                       </button>
                       <Delete
@@ -101,8 +114,6 @@
                         :data="{ id: Player._id }"
                         v-on:event_child="deleteAndRefresh"
                       ></Delete>
-
-                      <!-- <div class="modal"></div> -->
                     </td>
                   </tr>
                 </tbody>
@@ -245,6 +256,14 @@ export default {
             timeout: 2000
           });
         }
+      });
+    },
+    generateWelcomeMail(playerDetail) {
+      service.generateWelcomeMail(playerDetail, data => {
+        console.log(data);
+        // if (data.data) {
+        this.$$toaster.success("Mailed on your email Id.");
+        // }
       });
     }
   }

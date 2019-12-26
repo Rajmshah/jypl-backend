@@ -101,7 +101,7 @@ export default {
         this.$toaster.success("Login Successfully.", {
           timeout: 2000
         });
-        this.$router.push("/view-user");
+        this.$router.push("/view-player");
       } else {
         this.$toaster.error("Please Enter Valid Data.", {
           timeout: 2000
