@@ -2,6 +2,7 @@ import Vue from "vue";
 import BootstrapVue from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
+
 // toaster
 import Toaster from "v-toaster";
 // You need a specific loader for CSS files like https://github.com/webpack/css-loader
@@ -57,9 +58,34 @@ import {
   FontAwesomeLayersText
 } from "@fortawesome/vue-fontawesome";
 import tinymce from "vue-tinymce-editor";
+import globalJs from "@/service/global.js";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+
+Vue.filter("serverimage", (value, width, height, style) => {
+  const tmp = function(input, width, height, style) {
+    if (input) {
+      if (input.substr(0, 4) == "http") {
+        return input;
+      }
+      let image = globalJs.readFileUrl + input;
+      // var image = "http://wohlig.io:1330/api/Upload/readfile" + "?file=" + input;
+      if (width) {
+        image += `&width=${width}`;
+      }
+      if (height) {
+        image += `&height=${height}`;
+      }
+      if (style) {
+        image += `&style=${style}`;
+      }
+      return image;
+    }
+    return "img/jypl-logo.png";
+  };
+  return tmp(value, width, height, style);
+});
 
 Vue.use(Toasted, {
   position: "top-right",
