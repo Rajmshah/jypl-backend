@@ -3,6 +3,8 @@ import Router from "vue-router";
 
 import Login from "./views/Login.vue";
 
+import extra from "./views/extra.vue";
+
 // Player
 import ViewPlayer from "./views/Player/ViewPlayer.vue";
 import EditPlayer from "./views/Player/EditPlayer.vue";
@@ -83,6 +85,12 @@ export default new Router({
       name: "ViewTeamList",
       beforeEnter: guard,
       component: ViewTeamList
+    },
+    {
+      path: "/extra",
+      name: "extra",
+      beforeEnter: guard,
+      component: extra
     },
     {
       path: "/edit-team-list/:id",
