@@ -5,7 +5,7 @@
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand href="/view-brand" class="header-logo">
         <!-- <b-img :src="Logo" fluid /> -->
-        <b-img src="@/assets/jypl-logo.png" alt="JYPL" fluid />
+        <b-img src="https://storage.googleapis.com/jypl/jypl-logo.png" alt="JYPL" fluid />
         <span class="text-white">JYPL</span>
       </b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
@@ -24,7 +24,7 @@
 
 <script>
 import headerLogo from "@/assets/jypl-logo.png";
-import { globalAgent } from "http";
+// import { globalAgent } from "http";
 
 import global from "@/service/global.js";
 // import sidemenu from '@/components/sidemenu-section.vue';

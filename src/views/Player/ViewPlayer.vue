@@ -83,16 +83,17 @@
                     <td>{{ Player.team || "-" }}</td>
                     <td>{{ Player.paymentStatus || "-" }}</td>
                     <td class="">
-                      <!-- <button
+                      <button
                         class="text-dark btn pr-1 pl-0 py-0"
                         v-if="Player.paymentStatus === 'Paid'"
                         @click="generateWelcomeMail(Player)"
                       >
                         <font-awesome-icon :icon="['fas', 'envelope']" />
                       </button>
-                      <button
+                      <!-- <button
                         class="text-dark btn pr-1 pl-1 py-0"
                         v-if="Player.paymentStatus === 'Paid'"
+                        @click="generateInvoicePdf(Player)"
                       >
                         <font-awesome-icon :icon="['fas', 'download']" />
                       </button> -->
@@ -260,9 +261,15 @@ export default {
     },
     generateWelcomeMail(playerDetail) {
       service.generateWelcomeMail(playerDetail, data => {
-        console.log(data);
+        // console.log(data);
+        this.$toaster.success("Mailed on your email Id.");
+      });
+    },
+    generateInvoicePdf(playerDetail) {
+      service.generateInvoicePdf(playerDetail, data => {
+        // console.log(data);
         // if (data.data) {
-        this.$$toaster.success("Mailed on your email Id.");
+        //   location.href = "https://www.antennahouse.com/XSLsample/pdf/sample-link_1.pdf";
         // }
       });
     }

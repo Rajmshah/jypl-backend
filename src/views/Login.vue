@@ -6,7 +6,11 @@
           <div class="login-box card align-self-center">
             <b-form class="card-body">
               <div class="login-image login-box align-self-center mt-3">
-                <b-img src="@/assets/jypl-logo.png" alt="JYPL" fluid />
+                <img
+                  src="https://storage.googleapis.com/jypl/jypl-logo.png"
+                  alt="JYPL"
+                  class="img-fluid"
+                />
               </div>
               <div class="text-center mt-4 mb-3 text-uppercase font-size-lg">Login</div>
               <b-form-group class="form-group floating-label-form-group controls">
@@ -93,8 +97,12 @@ export default {
         password: formData.password
       };
       this.$v.formData.$touch();
+      // console.log(formData);
       if (this.$v.formData.$error) {
-      } else if (obj.email === "jypl@gmail.com" && obj.password === "jypl@2019") {
+      } else if (
+        obj.email === "jewelleryyouthforum@gmail.com" &&
+        obj.password === "jyfforum@2020"
+      ) {
         global.setUser({
           isLoggedIn: true
         });

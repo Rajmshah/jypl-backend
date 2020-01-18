@@ -225,5 +225,27 @@ export default {
       })
       .catch(err => {
         callback(err);
+      }),
+  generateInvoicePdf: (formData, callback) =>
+    axios
+      .post(`${adminUrl}Player/generateInvoicePdf`, formData)
+      .then(data => {
+        const fileName = `${data.data.fileName}.pdf`;
+        // data.data.filePath
+        const filePath = `${data.data.filePath}.pdf`;
+        console.log(data);
+        const blob = new Blob([filePath], {
+          type: "application/pdf"
+        });
+        const objectUrl = (window.URL || window.webkitURL).createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = objectUrl;
+        link.setAttribute("download", fileName);
+        document.body.appendChild(link);
+        link.click();
+        callback(data);
+      })
+      .catch(err => {
+        callback(err);
       })
 };
