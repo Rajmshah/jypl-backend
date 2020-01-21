@@ -93,7 +93,7 @@
                       <button
                         class="text-dark btn pr-1 pl-1 py-0"
                         v-if="Player.paymentStatus === 'Paid'"
-                        @click="generateInvoicePdf(Player)"
+                        @click="generateInvoiceMail(Player)"
                       >
                         <font-awesome-icon :icon="['fas', 'download']" />
                       </button>
@@ -139,24 +139,24 @@
 </template>
 
 <script>
-import HeaderSection from '@/components/header-section.vue';
-import Sidemenu from '@/components/sidemenu-section.vue';
-import service from '@/service/apiService';
-import Delete from '@/components/modal/delete.vue';
+import HeaderSection from "@/components/header-section.vue";
+import Sidemenu from "@/components/sidemenu-section.vue";
+import service from "@/service/apiService";
+import Delete from "@/components/modal/delete.vue";
 
 export default {
-  name: 'ViewPlayer',
+  name: "ViewPlayer",
   components: {
     HeaderSection,
     Sidemenu,
-    Delete,
+    Delete
   },
   data() {
     return {
-      type: 'Player',
-      id: '',
-      page: '',
-      searchText: '',
+      type: "Player",
+      id: "",
+      page: "",
+      searchText: "",
       currentPage: 1,
       totalCount: 0,
       perPage: 0,
@@ -165,38 +165,38 @@ export default {
       PlayerArray: [],
       breadCrum: [
         {
-          text: 'Player',
-        },
+          text: "Player"
+        }
       ],
       tableHeaders: [
         {
-          tableHeaderName: 'sr-no',
-          key: 'key1',
+          tableHeaderName: "sr-no",
+          key: "key1"
         },
         {
-          tableHeaderName: 'Player Id',
-          key: 'key1',
+          tableHeaderName: "Player Id",
+          key: "key1"
         },
         {
-          tableHeaderName: 'Name',
-          key: 'key1',
+          tableHeaderName: "Name",
+          key: "key1"
         },
         {
-          tableHeaderName: 'Team',
-          key: 'key1',
+          tableHeaderName: "Team",
+          key: "key1"
         },
         {
-          tableHeaderName: 'Payment Status',
-          key: 'key1',
+          tableHeaderName: "Payment Status",
+          key: "key1"
         },
         {
-          tableHeaderName: 'Action',
-          key: 'key1',
-        },
+          tableHeaderName: "Action",
+          key: "key1"
+        }
       ],
-      approvedClass: 'text-success',
-      rejectedClass: 'text-danger',
-      pendingClass: 'text-primary',
+      approvedClass: "text-success",
+      rejectedClass: "text-danger",
+      pendingClass: "text-primary"
     };
   },
   created() {
@@ -205,7 +205,7 @@ export default {
 
   methods: {
     deleteAndRefresh(obj) {
-      service.deletePlayer(obj._id, (data) => {
+      service.deletePlayer(obj._id, data => {
         // if (this.allPlayer.length == 1) {
         //   this.allPlayer = [];
         //   this.$router.go(0);
@@ -219,7 +219,7 @@ export default {
       const formData = {};
       formData.page = page;
       formData.name = this.searchText;
-      service.searchPlayer(formData, (data) => {
+      service.searchPlayer(formData, data => {
         if (data.status === 200) {
           this.allPlayer = data.data.result;
           this.totalCount = data.data.count;
@@ -227,9 +227,9 @@ export default {
         } else if (page > 1) {
           this.goToPage(page - 1);
         }
-        if (formData === 'noDataFound') {
+        if (formData === "noDataFound") {
           this.dataFound = false;
-        } else if (formData === 'error') {
+        } else if (formData === "error") {
           this.dataFound = false;
         } else {
           this.dataFound = true;
@@ -242,38 +242,46 @@ export default {
     },
     goToPage(page) {
       this.$router.push({
-        name: 'ViewPlayer',
+        name: "ViewPlayer"
       });
       this.viewPlayer(page);
     },
     generateExcel() {
-      service.generatePlayerExcel({}, 'Player', (err, result) => {
+      service.generatePlayerExcel({}, "Player", (err, result) => {
         if (err) {
-          this.$toaster.error('Error while generating Excel.', {
-            timeout: 2000,
+          this.$toaster.error("Error while generating Excel.", {
+            timeout: 2000
           });
         } else {
-          this.$toaster.success('Excel Generated Successfully.', {
-            timeout: 2000,
+          this.$toaster.success("Excel Generated Successfully.", {
+            timeout: 2000
           });
         }
       });
     },
     generateWelcomeMail(playerDetail) {
-      service.generateWelcomeMail(playerDetail, (data) => {
+      service.generateWelcomeMail(playerDetail, data => {
         // console.log(data);
-        this.$toaster.success('Mailed on your email Id.');
+        this.$toaster.success("Mailed on your email Id.");
       });
     },
     generateInvoicePdf(playerDetail) {
-      service.generateInvoicePdf(playerDetail, (data) => {
+      service.generateInvoicePdf(playerDetail, data => {
         // console.log(data);
         // if (data.data) {
         //   location.href = "https://www.antennahouse.com/XSLsample/pdf/sample-link_1.pdf";
         // }
       });
     },
-  },
+    generateInvoiceMail(playerDetail) {
+      service.generateInvoiceMail(playerDetail, data => {
+        // console.log(data);
+        // if (data.data) {
+        //   location.href = "https://www.antennahouse.com/XSLsample/pdf/sample-link_1.pdf";
+        // }
+      });
+    }
+  }
 };
 </script>
 

@@ -76,6 +76,15 @@ export default {
       .catch(err => {
         callback(err);
       }),
+  generateInvoiceMail: (data, callback) =>
+    axios
+      .post(`${adminUrl}Player/generateInvoiceMail`, data)
+      .then(responseData => {
+        callback(responseData);
+      })
+      .catch(err => {
+        callback(err);
+      }),
 
   // Player APIS CALLING END
 
@@ -230,10 +239,9 @@ export default {
     axios
       .post(`${adminUrl}Player/generateInvoicePdf`, formData)
       .then(data => {
-        const fileName = `${data.data.fileName}.pdf`;
+        const fileName = `${data.data.fileName}`;
         // data.data.filePath
-        const filePath = `${data.data.filePath}.pdf`;
-        console.log(data);
+        const filePath = `${data.data.filePath}`;
         const blob = new Blob([filePath], {
           type: "application/pdf"
         });
@@ -241,7 +249,7 @@ export default {
         const link = document.createElement("a");
         link.href = objectUrl;
         link.setAttribute("download", fileName);
-        document.body.appendChild(link);
+        // document.body.appendChild(link);
         link.click();
         callback(data);
       })
