@@ -451,11 +451,11 @@
                     ></b-form-input>
                   </b-form-group>
 
- <b-form-group>
+                  <b-form-group>
                     <div class="d-flex">
                       <div class="w-90">
                         <!-- Shirt Size -->
-                         <b-form-group label="Attendance" label-for="attendance">
+                        <b-form-group label="Attendance" label-for="attendance">
                           <b-form-select
                             id="attendance"
                             v-model="form.attendance"
@@ -466,7 +466,7 @@
                         </b-form-group>
                       </div>
                       <div class="w-90 ml-4">
-                          <b-form-group label="Batting Rate" label-for="battingRate">
+                        <b-form-group label="Batting Rate" label-for="battingRate">
                           <b-form-input
                             id="battingRate"
                             type="number"
@@ -476,12 +476,49 @@
                         </b-form-group>
                       </div>
                       <div class="w-90 ml-4">
-                            <b-form-group label="Bowling Rate" label-for="bowlingRate">
+                        <b-form-group label="Bowling Rate" label-for="bowlingRate">
                           <b-form-input
                             id="bowlingRate"
                             type="number"
                             v-model="form.bowlingRate"
                             placeholder="Enter Bowling Rate"
+                          ></b-form-input>
+                        </b-form-group>
+                      </div>
+                    </div>
+                  </b-form-group>
+
+                  <b-form-group>
+                    <div class="d-flex">
+                      <div class="w-90">
+                        <b-form-group label="Fielding Rate" label-for="fieldingRate">
+                          <b-form-input
+                            id="fieldingRate"
+                            type="number"
+                            v-model="form.fieldingRate"
+                            placeholder="Enter Fielding Rate"
+                          ></b-form-input>
+                        </b-form-group>
+                      </div>
+                      <div class="w-90 ml-4">
+                        <!-- Shirt Size -->
+                        <b-form-group label="Fitness Time" label-for="fitnessTime">
+                          <b-form-input
+                            id="fitnessTime"
+                            v-model="form.fitnessTime"
+                            type="text"
+                            placeholder="Enter Fitness Time"
+                          ></b-form-input>
+                        </b-form-group>
+                      </div>
+                      <div class="w-90 ml-4">
+                        <!-- Shirt Size -->
+                        <b-form-group label="Remark" label-for="remark">
+                          <b-form-input
+                            id="remark"
+                            v-model="form.remark"
+                            type="text"
+                            placeholder="Enter Remark"
                           ></b-form-input>
                         </b-form-group>
                       </div>
@@ -668,6 +705,7 @@ export default {
         trackLength: '',
         condition: [],
         checked: [],
+        fitnessTime: '',
         attendance: false,
       },
 
