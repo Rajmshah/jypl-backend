@@ -451,6 +451,43 @@
                     ></b-form-input>
                   </b-form-group>
 
+ <b-form-group>
+                    <div class="d-flex">
+                      <div class="w-90">
+                        <!-- Shirt Size -->
+                         <b-form-group label="Attendance" label-for="attendance">
+                          <b-form-select
+                            id="attendance"
+                            v-model="form.attendance"
+                            label="text"
+                            :value="value"
+                            :options="booleanOptions"
+                          ></b-form-select>
+                        </b-form-group>
+                      </div>
+                      <div class="w-90 ml-4">
+                          <b-form-group label="Batting Rate" label-for="battingRate">
+                          <b-form-input
+                            id="battingRate"
+                            type="number"
+                            v-model="form.battingRate"
+                            placeholder="Enter Batting Rate"
+                          ></b-form-input>
+                        </b-form-group>
+                      </div>
+                      <div class="w-90 ml-4">
+                            <b-form-group label="Bowling Rate" label-for="bowlingRate">
+                          <b-form-input
+                            id="bowlingRate"
+                            type="number"
+                            v-model="form.bowlingRate"
+                            placeholder="Enter Bowling Rate"
+                          ></b-form-input>
+                        </b-form-group>
+                      </div>
+                    </div>
+                  </b-form-group>
+
                   <!-- submit and reset button -->
                   <b-form-group class="text-center">
                     <b-button variant="primary" type="submit" class="mr-2 px-3 rounded-0"
@@ -475,13 +512,13 @@
 </template>
 
 <script>
-import DatePicker from "vue2-datepicker";
-import { Multiselect } from "vue-multiselect";
-import { VueTelInput } from "vue-tel-input";
-import moment from "moment";
-import service from "@/service/apiService";
-import Sidemenu from "@/components/sidemenu-section.vue";
-import HeaderSection from "@/components/header-section.vue";
+import DatePicker from 'vue2-datepicker';
+import { Multiselect } from 'vue-multiselect';
+import { VueTelInput } from 'vue-tel-input';
+import moment from 'moment';
+import service from '@/service/apiService';
+import Sidemenu from '@/components/sidemenu-section.vue';
+import HeaderSection from '@/components/header-section.vue';
 
 export default {
   components: {
@@ -489,7 +526,7 @@ export default {
     Multiselect,
     VueTelInput,
     HeaderSection,
-    Sidemenu
+    Sidemenu,
   },
   data() {
     return {
@@ -502,186 +539,187 @@ export default {
       playerOptions: [],
       teamOptions: [
         {
-          name: ""
-        }
+          name: '',
+        },
       ],
-      registeredDate: "",
+      registeredDate: '',
       max: 11,
-      bootstrapBtnPromise: "",
-      submitStatus: "true",
-      removeText: "true",
+      bootstrapBtnPromise: '',
+      submitStatus: 'true',
+      removeText: 'true',
 
       conditionOptions: [
         {
-          text: "I have read and accept the ",
-          value: "two",
-          showModal: true
-        }
+          text: 'I have read and accept the ',
+          value: 'two',
+          showModal: true,
+        },
       ],
 
       booleanOptions: [
-        { value: true, text: "Yes" },
-        { value: false, text: "No" }
+        { value: true, text: 'Yes' },
+        { value: false, text: 'No' },
       ],
 
       paymentMethodOptions: [
-        { value: "Cash", text: "Cash" },
-        { value: "Online", text: "Online" }
+        { value: 'Cash', text: 'Cash' },
+        { value: 'Online', text: 'Online' },
       ],
 
       paymentStatusOptions: [
-        { value: "Pending", text: "Pending" },
-        { value: "Paid", text: "Paid" }
+        { value: 'Pending', text: 'Pending' },
+        { value: 'Paid', text: 'Paid' },
       ],
 
       keyRoleOptions: [
-        { value: "Batsman", text: "Batsman" },
-        { value: "Bowler", text: "Bowler" },
-        { value: "All Rounder", text: "All Rounder" }
+        { value: 'Batsman', text: 'Batsman' },
+        { value: 'Bowler', text: 'Bowler' },
+        { value: 'All Rounder', text: 'All Rounder' },
       ],
 
       battingOptions: [
-        { value: "Left Hand", text: "Left Hand" },
-        { value: "Right Hand", text: "Right Hand" }
+        { value: 'Left Hand', text: 'Left Hand' },
+        { value: 'Right Hand', text: 'Right Hand' },
       ],
 
       bowlingOptions: [
-        { value: "Right Arm Medium Pace", text: "Right Arm Medium Pace" },
-        { value: "Left Arm Medium Pace", text: "Left Arm Medium Pace" },
-        { value: "Left Arm Spin", text: "Left Arm Spin" },
-        { value: "Right Arm Off Spin", text: "Right Arm Off Spin" },
-        { value: "Right Arm Leg Spin", text: "Right Arm Leg Spin" },
-        { value: "None", text: "None" }
+        { value: 'Right Arm Medium Pace', text: 'Right Arm Medium Pace' },
+        { value: 'Left Arm Medium Pace', text: 'Left Arm Medium Pace' },
+        { value: 'Left Arm Spin', text: 'Left Arm Spin' },
+        { value: 'Right Arm Off Spin', text: 'Right Arm Off Spin' },
+        { value: 'Right Arm Leg Spin', text: 'Right Arm Leg Spin' },
+        { value: 'None', text: 'None' },
       ],
 
       trackOptions: [
-        { value: "37", text: "37" },
-        { value: "38", text: "38" },
-        { value: "39", text: "39" },
-        { value: "40", text: "40" },
-        { value: "41", text: "41" },
-        { value: "42", text: "42" },
-        { value: "43", text: "43" },
-        { value: "44", text: "44" },
-        { value: "45", text: "45" },
-        { value: "46", text: "46" },
-        { value: "47", text: "47" }
+        { value: '37', text: '37' },
+        { value: '38', text: '38' },
+        { value: '39', text: '39' },
+        { value: '40', text: '40' },
+        { value: '41', text: '41' },
+        { value: '42', text: '42' },
+        { value: '43', text: '43' },
+        { value: '44', text: '44' },
+        { value: '45', text: '45' },
+        { value: '46', text: '46' },
+        { value: '47', text: '47' },
       ],
 
       trouserOptions: [
-        { value: "26", text: "26" },
-        { value: "28", text: "28" },
-        { value: "30", text: "30" },
-        { value: "32", text: "32" },
-        { value: "34", text: "34" },
-        { value: "36", text: "36" },
-        { value: "38", text: "38" },
-        { value: "40", text: "40" },
-        { value: "42", text: "42" },
-        { value: "44", text: "44" }
+        { value: '26', text: '26' },
+        { value: '28', text: '28' },
+        { value: '30', text: '30' },
+        { value: '32', text: '32' },
+        { value: '34', text: '34' },
+        { value: '36', text: '36' },
+        { value: '38', text: '38' },
+        { value: '40', text: '40' },
+        { value: '42', text: '42' },
+        { value: '44', text: '44' },
       ],
 
       shirtOptions: [
-        { value: "30", text: "30" },
-        { value: "32", text: "32" },
-        { value: "34", text: "34" },
-        { value: "36", text: "36" },
-        { value: "38", text: "38" },
-        { value: "40", text: "40" },
-        { value: "42", text: "42" },
-        { value: "44", text: "44" },
-        { value: "46", text: "46" },
-        { value: "48", text: "48" }
+        { value: '30', text: '30' },
+        { value: '32', text: '32' },
+        { value: '34', text: '34' },
+        { value: '36', text: '36' },
+        { value: '38', text: '38' },
+        { value: '40', text: '40' },
+        { value: '42', text: '42' },
+        { value: '44', text: '44' },
+        { value: '46', text: '46' },
+        { value: '48', text: '48' },
       ],
       showMessage: false,
-      message: "",
+      message: '',
       form: {
-        firstName: "",
-        middleName: "",
-        surname: "",
-        email: "",
-        dob: "",
-        age: "",
-        mobile: "",
-        photograph: "",
-        idProof: "",
-        businessCard: "",
-        team: "",
-        address: "",
+        firstName: '',
+        middleName: '',
+        surname: '',
+        email: '',
+        dob: '',
+        age: '',
+        mobile: '',
+        photograph: '',
+        idProof: '',
+        businessCard: '',
+        team: '',
+        address: '',
         company: {
-          name: "",
-          businessType: "",
-          designation: "",
-          relationship: "",
-          address: ""
+          name: '',
+          businessType: '',
+          designation: '',
+          relationship: '',
+          address: '',
         },
-        jerseyName: "",
-        keyRole: "",
+        jerseyName: '',
+        keyRole: '',
         hasPlayed: false,
-        bowlingType: "",
-        battingType: "",
+        bowlingType: '',
+        battingType: '',
         isWicketkeeper: false,
         beOwner: false,
         beSponsor: false,
-        shirtSize: "",
-        trouserSize: "",
-        paymentStatus: "Pending",
-        paymentMethod: "Online",
-        transactionId: "",
-        trackLength: "",
+        shirtSize: '',
+        trouserSize: '',
+        paymentStatus: 'Pending',
+        paymentMethod: 'Online',
+        transactionId: '',
+        trackLength: '',
         condition: [],
-        checked: []
+        checked: [],
+        attendance: false,
       },
 
       // date picker script
-      value: "",
-      time1: "",
-      time2: "",
-      time3: "",
+      value: '',
+      time1: '',
+      time2: '',
+      time3: '',
       // custom lang
       lang: {
-        days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        days: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         months: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec"
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
         ],
         pickers: [
-          "next 7 days",
+          'next 7 days',
           // "next 30 days",
-          "previous 7 days",
-          "previous 30 days"
-        ]
+          'previous 7 days',
+          'previous 30 days',
+        ],
       },
       // custom range shortcuts
       shortcuts: [
         {
-          text: "Today",
+          text: 'Today',
           onClick: () => {
             this.time3 = [new Date(), new Date()];
-          }
-        }
+          },
+        },
       ],
       error: [],
       breadCrum: [
         {
-          text: "Player",
-          href: "/view-player"
+          text: 'Player',
+          href: '/view-player',
         },
         {
-          text: "Edit Player"
-        }
+          text: 'Edit Player',
+        },
       ],
-      show: true
+      show: true,
     };
   },
   created() {
@@ -691,9 +729,9 @@ export default {
   methods: {
     getOne() {
       if (this.$route.params.id) {
-        service.getOnePlayer(this.$route.params.id, data => {
+        service.getOnePlayer(this.$route.params.id, (data) => {
           this.form = data.data;
-          this.registeredDate = moment(this.form.registrationDate).format("DD/MM/YYYY");
+          this.registeredDate = moment(this.form.registrationDate).format('DD/MM/YYYY');
           if (data.data.company) {
             this.form.company = data.data.company;
           } else {
@@ -702,7 +740,7 @@ export default {
           if (data.data.mobile) {
             this.form.mobile = data.data.mobile.toString();
           } else {
-            this.form.mobile = "";
+            this.form.mobile = '';
           }
 
           this.selectDate(data.data.dob);
@@ -710,23 +748,23 @@ export default {
           if (data.data.team) {
             this.form.team = { name: data.data.team };
           }
-          
+
           if (data.data.paymentStatus) {
             this.form.paymentStatus = data.data.paymentStatus;
           } else {
-            this.form.paymentStatus = "Pending";
+            this.form.paymentStatus = 'Pending';
           }
 
           if (data.data.paymentMethod) {
             this.form.paymentMethod = data.data.paymentMethod;
           } else {
-            this.form.paymentMethod = "Online";
+            this.form.paymentMethod = 'Online';
           }
         });
       }
     },
     getTeamList() {
-      service.searchTeamList({}, teamList => {
+      service.searchTeamList({}, (teamList) => {
         this.teamOptions = teamList.data;
       });
     },
@@ -737,18 +775,18 @@ export default {
         obj.team = obj.team.name;
       }
       obj.mobile = parseInt(obj.mobile);
-      service.updatePlayer(this.$route.params.id, obj, data => {
+      service.updatePlayer(this.$route.params.id, obj, (data) => {
         if (data.data) {
-          this.$router.push("/view-player");
+          this.$router.push('/view-player');
         }
       });
     },
     onCancel() {
-      this.$router.push("/view-player");
+      this.$router.push('/view-player');
     },
 
     selectDate(value) {
-      this.form.age = moment(new Date()).format("YYYY") - moment(value).format("YYYY");
+      this.form.age = moment(new Date()).format('YYYY') - moment(value).format('YYYY');
     },
     onClickProfileFile() {
       console.log(this.$refs);
@@ -758,29 +796,29 @@ export default {
       const { files } = this.$refs.fileInputProfile;
       if (files && files.length > 0 && files[0].name) {
         const filename = files[0].name;
-        if (filename.lastIndexOf(".") <= 0) {
-          this.$toasted.error("Please Add Valid File!");
+        if (filename.lastIndexOf('.') <= 0) {
+          this.$toasted.error('Please Add Valid File!');
         } else if (files[0].size > 1024 * 1024) {
-          this.$toasted.error("Image size is greater than 1 MB");
+          this.$toasted.error('Image size is greater than 1 MB');
         } else {
           const fileReader = new FileReader();
-          fileReader.addEventListener("load", () => {
+          fileReader.addEventListener('load', () => {
             this.imageUrl = fileReader.result;
           });
           fileReader.readAsDataURL(files[0]);
           this.image = files[0];
           const formData = new FormData();
-          formData.append("file", this.image);
-          service.upload(formData, data => {
+          formData.append('file', this.image);
+          service.upload(formData, (data) => {
             if (data.data.data) {
-              this.$toasted.success("Profile Image Uploaded Successfully");
+              this.$toasted.success('Profile Image Uploaded Successfully');
               this.showPhotograph = true;
               this.form.photograph = data.data.data[0];
             }
           });
         }
       } else {
-        this.$toasted.error("Select Profile Image");
+        this.$toasted.error('Select Profile Image');
       }
     },
     onClickIdentityFile() {
@@ -790,30 +828,30 @@ export default {
       const { files } = this.$refs.fileInputIdentity;
       if (files && files.length > 0 && files[0].name) {
         const filename = files[0].name;
-        if (filename.lastIndexOf(".") <= 0) {
-          this.$toasted.error("Please Add Valid File!");
+        if (filename.lastIndexOf('.') <= 0) {
+          this.$toasted.error('Please Add Valid File!');
         } else if (files[0].size > 1024 * 1024) {
-          this.$toasted.error("Image size is greater than 1 MB");
+          this.$toasted.error('Image size is greater than 1 MB');
         } else {
           const fileReader = new FileReader();
-          fileReader.addEventListener("load", () => {
+          fileReader.addEventListener('load', () => {
             this.imageUrl = fileReader.result;
           });
           fileReader.readAsDataURL(files[0]);
           this.image = files[0];
           const formData = new FormData();
-          formData.append("file", this.image);
-          service.upload(formData, data => {
+          formData.append('file', this.image);
+          service.upload(formData, (data) => {
             console.log(data);
             if (data.data.data) {
-              this.$toasted.success("Identity Image Uploaded Successfully");
+              this.$toasted.success('Identity Image Uploaded Successfully');
               this.showIdProof = true;
               this.form.idProof = data.data.data[0];
             }
           });
         }
       } else {
-        this.$toasted.error("Select Image");
+        this.$toasted.error('Select Image');
       }
     },
     onClickCardFile() {
@@ -823,32 +861,32 @@ export default {
       const { files } = this.$refs.fileInputCard;
       if (files && files.length > 0 && files[0].name) {
         const filename = files[0].name;
-        if (filename.lastIndexOf(".") <= 0) {
-          this.$toasted.error("Please Add Valid File!");
+        if (filename.lastIndexOf('.') <= 0) {
+          this.$toasted.error('Please Add Valid File!');
         } else if (files[0].size > 1024 * 1024) {
-          this.$toasted.error("Image size is greater than 1 MB");
+          this.$toasted.error('Image size is greater than 1 MB');
         } else {
           const fileReader = new FileReader();
-          fileReader.addEventListener("load", () => {
+          fileReader.addEventListener('load', () => {
             this.imageUrl = fileReader.result;
           });
           fileReader.readAsDataURL(files[0]);
           this.image = files[0];
           const formData = new FormData();
-          formData.append("file", this.image);
-          service.upload(formData, data => {
+          formData.append('file', this.image);
+          service.upload(formData, (data) => {
             if (data.data.data) {
-              this.$toasted.success("Business Card Image Uploaded Successfully");
+              this.$toasted.success('Business Card Image Uploaded Successfully');
               this.showBusinessCard = true;
               this.form.businessCard = data.data.data[0];
             }
           });
         }
       } else {
-        this.$toasted.error("Select Image");
+        this.$toasted.error('Select Image');
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
