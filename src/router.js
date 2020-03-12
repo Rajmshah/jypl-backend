@@ -9,6 +9,10 @@ import extra from "./views/extra.vue";
 import ViewPlayer from "./views/Player/ViewPlayer.vue";
 import EditPlayer from "./views/Player/EditPlayer.vue";
 
+// Couple
+import ViewCouple from "./views/Couple/ViewCouple.vue";
+import EditCouple from "./views/Couple/EditCouple.vue";
+
 // Setting
 import ViewSetting from "./views/Setting/ViewSetting.vue";
 import CreateSetting from "./views/Setting/CreateSetting.vue";
@@ -55,6 +59,18 @@ export default new Router({
       name: "EditPlayer",
       beforeEnter: guard,
       component: EditPlayer
+    },
+    {
+      path: "/view-couple",
+      name: "ViewCouple",
+      beforeEnter: guard,
+      component: ViewCouple
+    },
+    {
+      path: "/edit-couple/:id",
+      name: "EditCouple",
+      beforeEnter: guard,
+      component: EditCouple
     },
     {
       path: "/create-setting",

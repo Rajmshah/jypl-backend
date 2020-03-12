@@ -60,6 +60,10 @@ export default {
           link: "/view-player"
         },
         {
+          name: "Couple",
+          link: "/view-couple"
+        },
+        {
           name: "Team List",
           link: "/view-team-list"
         },
